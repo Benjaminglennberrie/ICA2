@@ -1,10 +1,18 @@
 public class BinarySearch {
+
+
+
+
     public static void main(String[] args) {
 
+
+
         //What Number you looking for?
-        int FindNum = 13;
+        int FindNum = 16;
         // Create an array with a size of 52 like a deck of cards
         int[] myArray = new int[52];
+
+
 
         // Populate the array with numbers from 1 to 52
         for (int i = 0; i < myArray.length; i++) {
@@ -14,35 +22,71 @@ public class BinarySearch {
         // Print the array
         System.out.print("Array elements: ");
         for (int i = 0; i < myArray.length; i++) {
-            // System.out.print(myArray[i] + " ");
+           System.out.print(myArray[i] + " ");
         }
-        int Num = myArray.length;
-
-        int HalfOfArray = myArray[(Num/2)-1];
-
-        System.out.println(myArray[(Num/2)-1]);
 
 
+
+        //Assign "Num" to the number of elements in the array.
+        int NumOfArrayElements = myArray.length;
+        int HalfOfNumOfArrayElements = 52;
+
+        //Assign CurrentNumber to Number being halfed over and over
+        int CurrentNumber = NumOfArrayElements;
+
+        //New line
         System.out.println("\n ");
 
-        while (HalfOfArray != FindNum) {
+        int kill = 0;
+        //Do the searching
+        while (CurrentNumber != FindNum) {
 
-            System.out.println("Not Found!");
+            System.out.println(CurrentNumber);
+            kill +=1;
 
-            if (HalfOfArray > FindNum) {
+            System.out.println("Not Found!... Halfing array... \n \n ");
+            int PreviousMax = HalfOfNumOfArrayElements;
+            HalfOfNumOfArrayElements /= 2;
 
-                for (int i = 0; i < (myArray.length / 2) - 1; i++) {
+
+            //IF NUMBER I'M LOOKING FOR IS LESS THAN CURRENT NUMBER
+            if (CurrentNumber > FindNum) {
+
+                int[] NewArray = new int[HalfOfNumOfArrayElements];
+
+                for (int i = 0; i < (HalfOfNumOfArrayElements) - 1; i++) {
                     myArray[i] = i + 1;
                 }
+                // Print the array
+                System.out.print("Array elements: ");
+                for (int i = 0; i < NewArray.length; i++) {
+                    System.out.print(myArray[i] + " ");
+                }
+                CurrentNumber = NewArray.length;
+            }
 
+            System.out.println(CurrentNumber);
+
+
+            if (CurrentNumber < FindNum) {
+
+                int[] NewArray = new int[PreviousMax];
+
+                for (int i = CurrentNumber; i < (PreviousMax) - 1; i++) {
+                    NewArray[i] = i + 1;
+                }
+                // Print the array
+                System.out.print("Array elements: ");
+                for (int i = 0; i < NewArray.length; i++) {
+                    System.out.print(myArray[i] + " ");
+                }
+                CurrentNumber = NewArray.length;
             }
-            // Print the array
-            System.out.print("Array elements: ");
-            for (int i = 0; i < (myArray.length / 2) - 1; i++) {
-                System.out.print(myArray[i] + " ");
-            }
+        if (kill == 6) {
+            System.exit(0);
         }
-
+        }
+        System.out.print("Searching stopped because Current Number is " + CurrentNumber + " and Number Trying to be found is also " + FindNum +" :-)");
     }
 
 
