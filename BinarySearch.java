@@ -1,18 +1,14 @@
+
+
 public class BinarySearch {
-
-
-
 
     public static void main(String[] args) {
 
+        // What number are you looking for?
+        int FindNum = 51;
 
-
-        //What Number you looking for?
-        int FindNum = 16;
         // Create an array with a size of 52 like a deck of cards
         int[] myArray = new int[52];
-
-
 
         // Populate the array with numbers from 1 to 52
         for (int i = 0; i < myArray.length; i++) {
@@ -20,91 +16,41 @@ public class BinarySearch {
         }
 
         // Print the array
-        System.out.print("Array elements: ");
+        System.out.print("\nArray elements: ");
         for (int i = 0; i < myArray.length; i++) {
-           System.out.print(myArray[i] + " ");
+            System.out.print(myArray[i] + " ");
         }
 
+        // Initialize the search range
+        int low = 0;
+        int high = myArray.length - 1;
 
+        // Do the searching
+        while (low <= high) {
 
-        //Assign "Num" to the number of elements in the array.
-        int NumOfArrayElements = myArray.length;
-        int HalfOfNumOfArrayElements = 52;
+            int mid = (low + high) / 2;
+            int midValue = myArray[mid];
 
-        //Assign CurrentNumber to Number being halfed over and over
-        int CurrentNumber = NumOfArrayElements;
+            System.out.println("\n\nAt the beginning of the while loop, midValue is: " + midValue);
 
-        //New line
-        System.out.println("\n ");
-
-        int kill = 0;
-        //Do the searching
-        while (CurrentNumber != FindNum) {
-
-            System.out.println(CurrentNumber);
-            kill +=1;
-
-            System.out.println("Not Found!... Halfing array... \n \n ");
-            int PreviousMax = HalfOfNumOfArrayElements;
-            HalfOfNumOfArrayElements /= 2;
-
-
-            //IF NUMBER I'M LOOKING FOR IS LESS THAN CURRENT NUMBER
-            if (CurrentNumber > FindNum) {
-
-                int[] NewArray = new int[HalfOfNumOfArrayElements];
-
-                for (int i = 0; i < (HalfOfNumOfArrayElements) - 1; i++) {
-                    myArray[i] = i + 1;
-                }
-                // Print the array
-                System.out.print("Array elements: ");
-                for (int i = 0; i < NewArray.length; i++) {
-                    System.out.print(myArray[i] + " ");
-                }
-                CurrentNumber = NewArray.length;
+            // If number found, print the result and exit
+            if (midValue == FindNum) {
+                System.out.println("Number found: " + FindNum);
+                break;
             }
 
-            System.out.println(CurrentNumber);
+            System.out.println("That isn't the number!... Adjusting search range... \n");
 
-
-            if (CurrentNumber < FindNum) {
-
-                int[] NewArray = new int[PreviousMax];
-
-                for (int i = CurrentNumber; i < (PreviousMax) - 1; i++) {
-                    NewArray[i] = i + 1;
-                }
-                // Print the array
-                System.out.print("Array elements: ");
-                for (int i = 0; i < NewArray.length; i++) {
-                    System.out.print(myArray[i] + " ");
-                }
-                CurrentNumber = NewArray.length;
+            // If the number is less than midValue, adjust the high end of the search range
+            if (FindNum < midValue) {
+                high = mid - 1;
             }
-        if (kill == 6) {
-            System.exit(0);
+
+            // If the number is greater than midValue, adjust the low end of the search range
+            if (FindNum > midValue) {
+                low = mid + 1;
+            }
+
         }
-        }
-        System.out.print("Searching stopped because Current Number is " + CurrentNumber + " and Number Trying to be found is also " + FindNum +" :-)");
     }
-
-
 }
-
-
-
-
-
-//BINARY-SEARCH(A, n, T)
-//        1 L = 0
-//        2 R = n − 1
-//        3 while L ≤ R
-//        4 m = b(L + R)/2c
-//        5 if A[m] < T
-//6 L = m + 1
-//        7 elseif A[m] > T
-//        8 R = m − 1
-//        9 else
-//        10 return m
-//        11 return −1 // invalid, not found
