@@ -5,7 +5,7 @@ public class BinarySearch {
     public static void main(String[] args) {
 
         // What number are you looking for?
-        int FindNum = 51;
+        int FindNum = 5;
 
         // Create an array with a size of 52 like a deck of cards
         int[] myArray = new int[52];
